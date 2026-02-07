@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Music Player</title>
+
+<style>
+:root {
+    --bg-color: #121212;
+    --card-color: #1f1f1f;
+    --accent-color: #1db954;
+    --text-color: #ffffff;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-color);
+    font-family: Arial, sans-serif;
+    color: var(--text-color);
+}
+
+.player {
+    width: 320px;
+    background: var(--card-color);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+h2, h3, h4 {
+    margin: 5px 0;
+}
+
+.progress-container {
+    width: 100%;
+    height: 6px;
+    background: #555;
+    margin: 12px 0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: var(--accent-color);
+    border-radius: 5px;
+}
+
+.time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.controls button {
+    font-size: 20px;
+    margin: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--text-color);
+}
+
+.controls button:hover {
+    color: var(--accent-color);
+}
+
+input[type="range"] {
+    width: 100%;
+    margin-top: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+li {
+    padding: 6px;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+}
+
+li:hover {
+    background: #333;
+}
+
+/* Theme Buttons */
+.theme-buttons button {
+    margin: 5px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="player">
+    <h2 id="title">Song Title</h2>
+    <h3 id="artist">Artist</h3>
+    <h4 id="director">Music Director</h4>
+
+    <audio id="audio"></audio>
+
+    <div class="progress-container" onclick="setProgress(event)">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="time">
+        <span id="currentTime">0:00</span>
+        <span id="duration">0:00</span>
+    </div>
+
+    <div class="controls">
+        <button onclick="prevSong()">⏮</button>
+        <button onclick="playPause()">▶️ / ⏸</button>
+        <button onclick="nextSong()">⏭</button>
+    </div>
+
+    <input type="range" min="0" max="1" step="0.01" onchange="setVolume(this.value)">
+
+    <h4>Playlist</h4>
+    <ul id="playlist"></ul>
+
+    <h4>Theme</h4>
+    <div class="theme-buttons">
+        <button onclick="setTheme('#121212','#1f1f1f','#1db954')">Green</button>
+        <button onclick="setTheme('#0f172a','#1e293b','#38bdf8')">Blue</button>
+        <button onclick="setTheme('#2a0f1f','#3b1e29','#f472b6')">Pink</button>
+    </
